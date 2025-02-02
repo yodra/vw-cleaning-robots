@@ -1,7 +1,6 @@
 package com.yodralopez.vwcleaningrobots.models;
 
-import com.yodralopez.vwcleaningrobots.exceptions.BoundsException;
-import com.yodralopez.vwcleaningrobots.exceptions.InvalidCommandException;
+import com.yodralopez.vwcleaningrobots.helpers.CommandHelper;
 
 public class Robot {
     private int x;
@@ -26,18 +25,11 @@ public class Robot {
 
     public void execute(String commands, Workspace workspace) {
         for (char command : commands.toCharArray()) {
+            CommandHelper.assertValid(command);
             switch (command) {
-                case 'L':
-                    turnLeft();
-                    break;
-                case 'R':
-                    turnRight();
-                    break;
-                case 'M':
-                    moveForward(workspace);
-                    break;
-                default:
-                    throw new InvalidCommandException(command);
+                case 'L' -> turnLeft();
+                case 'R' -> turnRight();
+                case 'M' -> moveForward(workspace);
             }
         }
     }
@@ -58,9 +50,7 @@ public class Robot {
         int newX = x + direction.getDeltaX();
         int newY = y + direction.getDeltaY();
 
-        if (!workspace.isWithinBounds(newX, newY)) {
-            throw new BoundsException();
-        }
+        workspace.assertWithinBounds(newX, newY);
 
         x = newX;
         y = newY;
