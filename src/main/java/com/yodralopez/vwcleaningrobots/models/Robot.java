@@ -1,5 +1,6 @@
 package com.yodralopez.vwcleaningrobots.models;
 
+import com.yodralopez.vwcleaningrobots.exceptions.BoundsException;
 import com.yodralopez.vwcleaningrobots.exceptions.InvalidCommandException;
 
 public class Robot {
@@ -34,6 +35,9 @@ public class Robot {
                     break;
                 case 'M':
                     moveForward();
+                    if (!workspace.isWithinBounds(x, y)) {
+                        throw new BoundsException();
+                    }
                     break;
                 default:
                     throw new InvalidCommandException(command);

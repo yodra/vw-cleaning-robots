@@ -1,5 +1,6 @@
 package com.yodralopez.vwcleaningrobots.models;
 
+import com.yodralopez.vwcleaningrobots.exceptions.BoundsException;
 import com.yodralopez.vwcleaningrobots.exceptions.InvalidCommandException;
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +30,17 @@ class RobotTest {
                 () -> robot.execute("LMZLMLMLMM", workspace));
 
         assert exception.getMessage().equals("Invalid command: Z");
+    }
+
+    @Test
+    void should_throw_exception_when_robot_moves_beyond_upper_right_corner() {
+        Robot robot = Robot.initialization(5, 5, NORTH);
+        Workspace workspace = Workspace.create(5, 5);
+
+        Exception exception = assertThrows(BoundsException.class,
+                () -> robot.execute("M", workspace));
+
+        assert exception.getMessage().equals("Robot cannot move outside workspace");
     }
 
 }
