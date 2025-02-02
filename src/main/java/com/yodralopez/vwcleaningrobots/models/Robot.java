@@ -34,10 +34,7 @@ public class Robot {
                     turnRight();
                     break;
                 case 'M':
-                    moveForward();
-                    if (!workspace.isWithinBounds(x, y)) {
-                        throw new BoundsException();
-                    }
+                    moveForward(workspace);
                     break;
                 default:
                     throw new InvalidCommandException(command);
@@ -57,21 +54,16 @@ public class Robot {
         return direction;
     }
 
-    private void moveForward() {
-        switch (direction) {
-            case N:
-                y += 1;
-                break;
-            case E:
-                x += 1;
-                break;
-            case S:
-                y -= 1;
-                break;
-            case W:
-                x -= 1;
-                break;
+    private void moveForward(Workspace workspace) {
+        int newX = x + direction.getDeltaX();
+        int newY = y + direction.getDeltaY();
+
+        if (!workspace.isWithinBounds(newX, newY)) {
+            throw new BoundsException();
         }
+
+        x = newX;
+        y = newY;
     }
 
     private void turnRight() {
