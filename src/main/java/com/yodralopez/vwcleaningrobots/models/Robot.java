@@ -1,9 +1,11 @@
 package com.yodralopez.vwcleaningrobots.models;
 
+import com.yodralopez.vwcleaningrobots.exceptions.InvalidCommandException;
+
 public class Robot {
-    private final int x;
-    private final int y;
-    private final CardinalPoint orientation;
+    private int x;
+    private int y;
+    private CardinalPoint orientation;
 
     public Robot() {
         this.x = 0;
@@ -17,8 +19,88 @@ public class Robot {
         this.orientation = orientation;
     }
 
-    public Robot initialization(int x, int y, CardinalPoint orientation) {
+    public static Robot initialization(int x, int y, CardinalPoint orientation) {
         return new Robot(x, y, orientation);
     }
 
+    public void execute(String commands, Workspace workspace) {
+        for (char command : commands.toCharArray()) {
+            switch (command) {
+                case 'L':
+                    turnLeft();
+                    break;
+                case 'R':
+                    turnRight();
+                    break;
+                case 'M':
+                    moveForward();
+                    break;
+                default:
+                    throw new InvalidCommandException(command);
+            }
+        }
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public CardinalPoint getOrientation() {
+        return orientation;
+    }
+
+    private void moveForward() {
+        switch (orientation) {
+            case NORTH:
+                y += 1;
+                break;
+            case EAST:
+                x += 1;
+                break;
+            case SOUTH:
+                y -= 1;
+                break;
+            case WEST:
+                x -= 1;
+                break;
+        }
+    }
+
+    private void turnRight() {
+        switch (orientation) {
+            case NORTH:
+                orientation = CardinalPoint.EAST;
+                break;
+            case EAST:
+                orientation = CardinalPoint.SOUTH;
+                break;
+            case SOUTH:
+                orientation = CardinalPoint.WEST;
+                break;
+            case WEST:
+                orientation = CardinalPoint.NORTH;
+                break;
+        }
+    }
+
+    private void turnLeft() {
+        switch (orientation) {
+            case NORTH:
+                orientation = CardinalPoint.WEST;
+                break;
+            case WEST:
+                orientation = CardinalPoint.SOUTH;
+                break;
+            case SOUTH:
+                orientation = CardinalPoint.EAST;
+                break;
+            case EAST:
+                orientation = CardinalPoint.NORTH;
+                break;
+        }
+    }
 }
