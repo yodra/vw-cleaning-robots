@@ -8,6 +8,7 @@ public class Robot {
     private Direction direction;
 
     public Robot() {
+        this.position = Position.of(0, 0);
         this.direction = Direction.N;
     }
 
