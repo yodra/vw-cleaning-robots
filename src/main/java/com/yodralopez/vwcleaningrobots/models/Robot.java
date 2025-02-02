@@ -45,9 +45,7 @@ public class Robot {
     }
 
     private void moveForward(Workspace workspace) {
-        int x = position.x() + direction.getDeltaX();
-        int y = position.y() + direction.getDeltaY();
-        Position newPosition = Position.of(x, y);
+        Position newPosition = position.increment(direction);
         workspace.assertPositionValid(newPosition);
         this.position = newPosition;
     }

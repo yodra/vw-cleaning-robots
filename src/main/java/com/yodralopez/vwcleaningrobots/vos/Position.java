@@ -1,6 +1,7 @@
 package com.yodralopez.vwcleaningrobots.vos;
 
 import com.yodralopez.vwcleaningrobots.exceptions.PositionException;
+import com.yodralopez.vwcleaningrobots.models.Direction;
 
 import java.util.Objects;
 
@@ -18,6 +19,10 @@ public final class Position {
             throw new PositionException("Position cannot be negative");
         }
         return new Position(x, y);
+    }
+
+    public Position increment(Direction direction) {
+        return Position.of(x + direction.getDeltaX(), y + direction.getDeltaY());
     }
 
     public int x() {
