@@ -46,6 +46,11 @@ public class Robot {
         return direction;
     }
 
+    @Override
+    public String toString() {
+        return x + " " + y + " " + direction;
+    }
+
     private void moveForward(Workspace workspace) {
         int newX = x + direction.getDeltaX();
         int newY = y + direction.getDeltaY();
