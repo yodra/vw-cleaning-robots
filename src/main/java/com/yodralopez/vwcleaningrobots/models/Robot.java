@@ -6,21 +6,21 @@ import com.yodralopez.vwcleaningrobots.exceptions.InvalidCommandException;
 public class Robot {
     private int x;
     private int y;
-    private CardinalPoint orientation;
+    private Direction direction;
 
     public Robot() {
         this.x = 0;
         this.y = 0;
-        this.orientation = CardinalPoint.NORTH;
+        this.direction = Direction.NORTH;
     }
 
-    private Robot(int x, int y, CardinalPoint orientation) {
+    private Robot(int x, int y, Direction direction) {
         this.x = x;
         this.y = y;
-        this.orientation = orientation;
+        this.direction = direction;
     }
 
-    public static Robot initialization(int x, int y, CardinalPoint orientation) {
+    public static Robot initialization(int x, int y, Direction orientation) {
         return new Robot(x, y, orientation);
     }
 
@@ -53,12 +53,12 @@ public class Robot {
         return y;
     }
 
-    public CardinalPoint getOrientation() {
-        return orientation;
+    public Direction getDirection() {
+        return direction;
     }
 
     private void moveForward() {
-        switch (orientation) {
+        switch (direction) {
             case NORTH:
                 y += 1;
                 break;
@@ -75,35 +75,35 @@ public class Robot {
     }
 
     private void turnRight() {
-        switch (orientation) {
+        switch (direction) {
             case NORTH:
-                orientation = CardinalPoint.EAST;
+                direction = Direction.EAST;
                 break;
             case EAST:
-                orientation = CardinalPoint.SOUTH;
+                direction = Direction.SOUTH;
                 break;
             case SOUTH:
-                orientation = CardinalPoint.WEST;
+                direction = Direction.WEST;
                 break;
             case WEST:
-                orientation = CardinalPoint.NORTH;
+                direction = Direction.NORTH;
                 break;
         }
     }
 
     private void turnLeft() {
-        switch (orientation) {
+        switch (direction) {
             case NORTH:
-                orientation = CardinalPoint.WEST;
+                direction = Direction.WEST;
                 break;
             case WEST:
-                orientation = CardinalPoint.SOUTH;
+                direction = Direction.SOUTH;
                 break;
             case SOUTH:
-                orientation = CardinalPoint.EAST;
+                direction = Direction.EAST;
                 break;
             case EAST:
-                orientation = CardinalPoint.NORTH;
+                direction = Direction.NORTH;
                 break;
         }
     }

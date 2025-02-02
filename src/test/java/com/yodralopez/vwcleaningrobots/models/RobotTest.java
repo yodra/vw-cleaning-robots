@@ -4,7 +4,7 @@ import com.yodralopez.vwcleaningrobots.exceptions.BoundsException;
 import com.yodralopez.vwcleaningrobots.exceptions.InvalidCommandException;
 import org.junit.jupiter.api.Test;
 
-import static com.yodralopez.vwcleaningrobots.models.CardinalPoint.NORTH;
+import static com.yodralopez.vwcleaningrobots.models.Direction.NORTH;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RobotTest {
@@ -18,7 +18,7 @@ class RobotTest {
 
         assert robot.getX() == 1;
         assert robot.getY() == 3;
-        assert robot.getOrientation() == NORTH;
+        assert robot.getDirection() == NORTH;
     }
 
     @Test
