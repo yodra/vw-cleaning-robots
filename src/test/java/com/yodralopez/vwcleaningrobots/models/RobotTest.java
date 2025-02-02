@@ -4,26 +4,26 @@ import com.yodralopez.vwcleaningrobots.exceptions.BoundsException;
 import com.yodralopez.vwcleaningrobots.exceptions.InvalidCommandException;
 import org.junit.jupiter.api.Test;
 
-import static com.yodralopez.vwcleaningrobots.models.Direction.NORTH;
+import static com.yodralopez.vwcleaningrobots.models.Direction.N;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RobotTest {
 
     @Test
     void should_move_following_instructions() {
-        Robot robot = Robot.initialization(1, 2, NORTH);
+        Robot robot = Robot.initialization(1, 2, N);
         Workspace workspace = Workspace.create(5, 5);
 
         robot.execute("LMLMLMLMM", workspace);
 
         assert robot.getX() == 1;
         assert robot.getY() == 3;
-        assert robot.getDirection() == NORTH;
+        assert robot.getDirection() == N;
     }
 
     @Test
     void should_throw_exception_when_invalid_command() {
-        Robot robot = Robot.initialization(1, 2, NORTH);
+        Robot robot = Robot.initialization(1, 2, N);
         Workspace workspace = Workspace.create(5, 5);
 
         Exception exception = assertThrows(InvalidCommandException.class,
@@ -34,7 +34,7 @@ class RobotTest {
 
     @Test
     void should_throw_exception_when_robot_moves_beyond_upper_right_corner() {
-        Robot robot = Robot.initialization(5, 5, NORTH);
+        Robot robot = Robot.initialization(5, 5, N);
         Workspace workspace = Workspace.create(5, 5);
 
         Exception exception = assertThrows(BoundsException.class,

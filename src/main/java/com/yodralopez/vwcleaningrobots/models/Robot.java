@@ -11,7 +11,7 @@ public class Robot {
     public Robot() {
         this.x = 0;
         this.y = 0;
-        this.direction = Direction.NORTH;
+        this.direction = Direction.N;
     }
 
     private Robot(int x, int y, Direction direction) {
@@ -59,16 +59,16 @@ public class Robot {
 
     private void moveForward() {
         switch (direction) {
-            case NORTH:
+            case N:
                 y += 1;
                 break;
-            case EAST:
+            case E:
                 x += 1;
                 break;
-            case SOUTH:
+            case S:
                 y -= 1;
                 break;
-            case WEST:
+            case W:
                 x -= 1;
                 break;
         }
@@ -76,34 +76,34 @@ public class Robot {
 
     private void turnRight() {
         switch (direction) {
-            case NORTH:
-                direction = Direction.EAST;
+            case N:
+                direction = Direction.E;
                 break;
-            case EAST:
-                direction = Direction.SOUTH;
+            case E:
+                direction = Direction.S;
                 break;
-            case SOUTH:
-                direction = Direction.WEST;
+            case S:
+                direction = Direction.W;
                 break;
-            case WEST:
-                direction = Direction.NORTH;
+            case W:
+                direction = Direction.N;
                 break;
         }
     }
 
     private void turnLeft() {
         switch (direction) {
-            case NORTH:
-                direction = Direction.WEST;
+            case N:
+                direction = Direction.W;
                 break;
-            case WEST:
-                direction = Direction.SOUTH;
+            case W:
+                direction = Direction.S;
                 break;
-            case SOUTH:
-                direction = Direction.EAST;
+            case S:
+                direction = Direction.E;
                 break;
-            case EAST:
-                direction = Direction.NORTH;
+            case E:
+                direction = Direction.N;
                 break;
         }
     }
