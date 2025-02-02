@@ -15,6 +15,9 @@ public class Workspace {
     }
 
     public static Workspace create(int width, int height) {
+        if (width <= 0 || height <= 0) {
+            throw new WorkspaceException("Workspace dimensions must be greater than 0");
+        }
         return new Workspace(width, height);
     }
 
