@@ -13,7 +13,7 @@ java {
 }
 
 application {
-    mainClass = 'com.yodralopez.vwcleaningrobots.VwCleaningRobotsApplication'
+    mainClass = 'com.yodralopez.vwcleaningrobots.RobotController'
 }
 
 repositories {

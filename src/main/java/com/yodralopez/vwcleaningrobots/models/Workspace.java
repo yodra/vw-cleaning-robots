@@ -18,7 +18,7 @@ public class Workspace {
         return new Workspace(width, height);
     }
 
-    public void assertWithinBounds(int newX, int newY) {
+    public void assertPositionValid(int newX, int newY) {
         if (!this.isWithinBounds(newX, newY)) {
             throw new BoundsException();
         }

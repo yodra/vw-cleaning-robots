@@ -55,7 +55,7 @@ public class Robot {
         int newX = x + direction.getDeltaX();
         int newY = y + direction.getDeltaY();
 
-        workspace.assertWithinBounds(newX, newY);
+        workspace.assertPositionValid(newX, newY);
 
         x = newX;
         y = newY;

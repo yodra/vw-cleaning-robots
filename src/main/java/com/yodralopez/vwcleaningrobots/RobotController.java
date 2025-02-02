@@ -10,7 +10,7 @@ import com.yodralopez.vwcleaningrobots.input.RobotFileReader;
 
 import java.util.List;
 
-public class VwCleaningRobotsApplication {
+public class RobotController {
 
     public static void main(String[] args) {
         String filePath = args[0];
