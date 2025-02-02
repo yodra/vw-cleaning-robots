@@ -1,6 +1,6 @@
 package com.yodralopez.vwcleaningrobots.models;
 
-import com.yodralopez.vwcleaningrobots.exceptions.BoundsException;
+import com.yodralopez.vwcleaningrobots.exceptions.WorkspaceException;
 import com.yodralopez.vwcleaningrobots.vos.Position;
 
 public class Workspace {
@@ -21,7 +21,7 @@ public class Workspace {
 
     public void assertPositionValid(Position position) {
         if (!this.isWithinBounds(position)) {
-            throw new BoundsException();
+            throw new WorkspaceException("Robot cannot move outside workspace");
         }
     }
 

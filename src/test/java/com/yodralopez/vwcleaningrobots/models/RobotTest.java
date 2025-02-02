@@ -1,6 +1,6 @@
 package com.yodralopez.vwcleaningrobots.models;
 
-import com.yodralopez.vwcleaningrobots.exceptions.BoundsException;
+import com.yodralopez.vwcleaningrobots.exceptions.WorkspaceException;
 import com.yodralopez.vwcleaningrobots.exceptions.InvalidCommandException;
 import com.yodralopez.vwcleaningrobots.vos.Position;
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@ class RobotTest {
         Robot robot = Robot.initialization(new Position(5, 5), N);
         Workspace workspace = Workspace.create(5, 5);
 
-        Exception exception = assertThrows(BoundsException.class,
+        Exception exception = assertThrows(WorkspaceException.class,
                 () -> robot.execute("M", workspace));
 
         assert exception.getMessage().equals("Robot cannot move outside workspace");
