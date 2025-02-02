@@ -1,48 +1,71 @@
 package com.yodralopez.vwcleaningrobots.models;
 
-import com.yodralopez.vwcleaningrobots.exceptions.WorkspaceException;
 import com.yodralopez.vwcleaningrobots.exceptions.InvalidCommandException;
+import com.yodralopez.vwcleaningrobots.exceptions.WorkspaceException;
 import com.yodralopez.vwcleaningrobots.vos.Position;
 import org.junit.jupiter.api.Test;
 
-import java.util.Objects;
-
-import static com.yodralopez.vwcleaningrobots.models.Direction.N;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class RobotTest {
 
     @Test
-    void should_move_following_instructions() {
-        Robot robot = Robot.initialization(new Position(1, 2), N);
-        Workspace workspace = Workspace.create(5, 5);
+    void shouldMoveForwardWithinWorkspace() {
+        Robot robot = Robot.initialization(new Position(0, 0), Direction.N);
 
-        robot.execute("LMLMLMLMM", workspace);
+        robot.execute("M", Workspace.create(5, 5));
 
-        assert Objects.equals(robot.getPosition(), new Position(1, 3));
-        assert robot.getDirection() == N;
+        assertEquals(new Position(0, 1), robot.getPosition());
     }
 
     @Test
-    void should_throw_exception_when_invalid_command() {
-        Robot robot = Robot.initialization(new Position(1, 2), N);
-        Workspace workspace = Workspace.create(5, 5);
+    void shouldTurnRight() {
+        Robot robot = Robot.initialization(new Position(5, 5), Direction.N);
+
+        robot.execute("R", Workspace.create(5, 5));
+
+        assertEquals(Direction.E, robot.getDirection());
+    }
+
+    @Test
+    void shouldTurnLeft() {
+        Robot robot = Robot.initialization(new Position(5, 5), Direction.N);
+
+        robot.execute("L", Workspace.create(5, 5));
+
+        assertEquals(Direction.W, robot.getDirection());
+    }
+
+    @Test
+    void shouldMoveFollowingTheInstructions() {
+        Robot robot = Robot.initialization(new Position(1, 2), Direction.N);
+
+        robot.execute("LMLMLMLMM", Workspace.create(5, 5));
+
+        assertEquals(new Position(1, 3), robot.getPosition());
+        assertEquals(Direction.N, robot.getDirection());
+    }
+
+    @Test
+    void shouldThrowAnExceptionWhenInvalidCommand() {
+        Robot robot = Robot.initialization(new Position(5, 5), Direction.N);
+        String commands = "XYZ";
 
         Exception exception = assertThrows(InvalidCommandException.class,
-                () -> robot.execute("LMZLMLMLMM", workspace));
+                () -> robot.execute(commands, Workspace.create(5, 5)));
 
-        assert exception.getMessage().equals("Invalid command: Z");
+        assertTrue(exception.getMessage().contains("Invalid command"));
     }
 
     @Test
-    void should_throw_exception_when_robot_moves_beyond_upper_right_corner() {
-        Robot robot = Robot.initialization(new Position(5, 5), N);
-        Workspace workspace = Workspace.create(5, 5);
+    void shouldThrowAnExceptionWhenRobotMovesBeyondUpperRightCorner() {
+        Robot robot = Robot.initialization(new Position(5, 5), Direction.N);
 
         Exception exception = assertThrows(WorkspaceException.class,
-                () -> robot.execute("M", workspace));
+                () -> robot.execute("M", Workspace.create(5, 5)));
 
-        assert exception.getMessage().equals("Robot cannot move outside workspace");
+        assertTrue(exception.getMessage().contains("Robot cannot move outside workspace"));
     }
+
 
 }
