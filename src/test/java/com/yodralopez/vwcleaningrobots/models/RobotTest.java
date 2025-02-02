@@ -10,6 +10,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class RobotTest {
 
     @Test
+    void shouldEveryNewRobotCouldStartInTheOrigin() {
+        Robot robot = new Robot();
+
+        assertEquals(0, robot.getPosition().x());
+        assertEquals(0, robot.getPosition().y());
+    }
+
+    @Test
+    void shouldEveryNewRobotFacingNorth() {
+        Robot robot = new Robot();
+
+        assertEquals(Direction.N, robot.getDirection());
+    }
+
+    @Test
     void shouldMoveForwardWithinWorkspace() {
         Robot robot = Robot.initialization(Position.of(0, 0), Direction.N);
 
