@@ -67,36 +67,10 @@ public class Robot {
     }
 
     private void turnRight() {
-        switch (direction) {
-            case N:
-                direction = Direction.E;
-                break;
-            case E:
-                direction = Direction.S;
-                break;
-            case S:
-                direction = Direction.W;
-                break;
-            case W:
-                direction = Direction.N;
-                break;
-        }
+        direction = direction.right();
     }
 
     private void turnLeft() {
-        switch (direction) {
-            case N:
-                direction = Direction.W;
-                break;
-            case W:
-                direction = Direction.S;
-                break;
-            case S:
-                direction = Direction.E;
-                break;
-            case E:
-                direction = Direction.N;
-                break;
-        }
+        direction = direction.left();
     }
 }

@@ -22,4 +22,13 @@ public enum Direction {
         return deltaY;
     }
 
+    public Direction left() {
+        int newDirectionIndex = (ordinal() + 3) % 4;
+        return values()[newDirectionIndex];
+    }
+
+    public Direction right() {
+        int newDirectionIndex = (ordinal() + 1) % 4;
+        return values()[newDirectionIndex];
+    }
 }
