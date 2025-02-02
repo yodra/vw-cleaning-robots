@@ -4,6 +4,7 @@ import com.yodralopez.vwcleaningrobots.exceptions.RobotFileReaderException;
 import com.yodralopez.vwcleaningrobots.input.RobotData;
 import com.yodralopez.vwcleaningrobots.input.SimulationData;
 import com.yodralopez.vwcleaningrobots.models.Direction;
+import com.yodralopez.vwcleaningrobots.vos.Position;
 import com.yodralopez.vwcleaningrobots.models.Robot;
 import com.yodralopez.vwcleaningrobots.models.Workspace;
 import com.yodralopez.vwcleaningrobots.input.RobotFileReader;
@@ -23,7 +24,8 @@ public class RobotController {
             List<RobotData> dataRobots = simulationData.getRobotsData();
 
             for (RobotData data : dataRobots) {
-                Robot robot = Robot.initialization(data.x(), data.y(), Direction.valueOf(data.direction()));
+                Position position = new Position(data.x(), data.y());
+                Robot robot = Robot.initialization(position, Direction.valueOf(data.direction()));
                 robot.execute(data.commands(), workspace);
                 System.out.println(robot);
             }

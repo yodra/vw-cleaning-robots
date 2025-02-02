@@ -1,26 +1,24 @@
 package com.yodralopez.vwcleaningrobots.models;
 
 import com.yodralopez.vwcleaningrobots.helpers.CommandHelper;
+import com.yodralopez.vwcleaningrobots.vos.Position;
 
 public class Robot {
-    private int x;
-    private int y;
+    private Position position;
     private Direction direction;
 
     public Robot() {
-        this.x = 0;
-        this.y = 0;
+        this.position = new Position(0, 0);
         this.direction = Direction.N;
     }
 
-    private Robot(int x, int y, Direction direction) {
-        this.x = x;
-        this.y = y;
+    private Robot(Position position, Direction direction) {
+        this.position = position;
         this.direction = direction;
     }
 
-    public static Robot initialization(int x, int y, Direction orientation) {
-        return new Robot(x, y, orientation);
+    public static Robot initialization(Position position, Direction orientation) {
+        return new Robot(position, orientation);
     }
 
     public void execute(String commands, Workspace workspace) {
@@ -34,12 +32,8 @@ public class Robot {
         }
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
+    public Position getPosition() {
+        return position;
     }
 
     public Direction getDirection() {
@@ -48,17 +42,15 @@ public class Robot {
 
     @Override
     public String toString() {
-        return x + " " + y + " " + direction;
+        return position.toString() + " " + direction;
     }
 
     private void moveForward(Workspace workspace) {
-        int newX = x + direction.getDeltaX();
-        int newY = y + direction.getDeltaY();
-
-        workspace.assertPositionValid(newX, newY);
-
-        x = newX;
-        y = newY;
+        int x = position.x() + direction.getDeltaX();
+        int y = position.y() + direction.getDeltaY();
+        Position newPosition = new Position(x, y);
+        workspace.assertPositionValid(newPosition);
+        this.position = newPosition;
     }
 
     private void turnRight() {

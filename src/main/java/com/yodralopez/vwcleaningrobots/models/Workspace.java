@@ -1,6 +1,7 @@
 package com.yodralopez.vwcleaningrobots.models;
 
 import com.yodralopez.vwcleaningrobots.exceptions.BoundsException;
+import com.yodralopez.vwcleaningrobots.vos.Position;
 
 public class Workspace {
     private static final int BOTTOM = 0;
@@ -18,14 +19,14 @@ public class Workspace {
         return new Workspace(width, height);
     }
 
-    public void assertPositionValid(int newX, int newY) {
-        if (!this.isWithinBounds(newX, newY)) {
+    public void assertPositionValid(Position position) {
+        if (!this.isWithinBounds(position)) {
             throw new BoundsException();
         }
     }
 
-    private boolean isWithinBounds(int x, int y) {
-        return isWithinWidth(x) && isWithinHeight(y);
+    private boolean isWithinBounds(Position position) {
+        return isWithinWidth(position.x()) && isWithinHeight(position.y());
     }
 
     private boolean isWithinWidth(int x) {
