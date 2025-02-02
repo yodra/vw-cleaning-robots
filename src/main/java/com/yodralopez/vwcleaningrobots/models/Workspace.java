@@ -4,8 +4,7 @@ import com.yodralopez.vwcleaningrobots.exceptions.WorkspaceException;
 import com.yodralopez.vwcleaningrobots.vos.Position;
 
 public class Workspace {
-    private static final int BOTTOM = 0;
-    private static final int LEFT = 0;
+    private static final Position origin = Position.of(0, 0);
 
     private final int width;
     private final int height;
@@ -30,10 +29,10 @@ public class Workspace {
     }
 
     private boolean isWithinWidth(int x) {
-        return x >= BOTTOM && x <= width;
+        return x >= origin.x() && x <= width;
     }
 
     private boolean isWithinHeight(int y) {
-        return y >= LEFT && y <= height;
+        return y >= origin.y() && y <= height;
     }
 }

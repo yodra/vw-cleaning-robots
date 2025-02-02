@@ -22,7 +22,7 @@ public class RobotController {
         List<RobotData> dataRobots = simulationData.getRobotsData();
 
         for (RobotData data : dataRobots) {
-            Position position = new Position(data.x(), data.y());
+            Position position = Position.of(data.x(), data.y());
             Robot robot = Robot.initialization(position, Direction.valueOf(data.direction()));
             robot.execute(data.commands(), workspace);
             System.out.println(robot);

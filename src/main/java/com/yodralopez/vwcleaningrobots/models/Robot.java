@@ -8,7 +8,6 @@ public class Robot {
     private Direction direction;
 
     public Robot() {
-        this.position = new Position(0, 0);
         this.direction = Direction.N;
     }
 
@@ -48,7 +47,7 @@ public class Robot {
     private void moveForward(Workspace workspace) {
         int x = position.x() + direction.getDeltaX();
         int y = position.y() + direction.getDeltaY();
-        Position newPosition = new Position(x, y);
+        Position newPosition = Position.of(x, y);
         workspace.assertPositionValid(newPosition);
         this.position = newPosition;
     }
