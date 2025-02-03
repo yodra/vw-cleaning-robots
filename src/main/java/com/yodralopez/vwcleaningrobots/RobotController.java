@@ -20,13 +20,14 @@ public class RobotController {
 
         Workspace workspace = Workspace.create(instructionsData.getWidth(), instructionsData.getHeight());
         List<RobotData> dataRobots = instructionsData.getRobotsData();
-
+        StringBuilder output = new StringBuilder();
         for (RobotData data : dataRobots) {
             Position position = Position.of(data.x(), data.y());
             Robot robot = Robot.initialization(position, Direction.valueOf(data.direction()));
             robot.execute(data.commands(), workspace);
-            System.out.println(robot);
+            output.append(robot).append("\n");
         }
+        System.out.println(output);
     }
 
 }

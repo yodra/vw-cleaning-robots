@@ -1,10 +1,10 @@
 package com.yodralopez.vwcleaningrobots.instructions;
 
+import com.yodralopez.vwcleaningrobots.FileTestHelper;
 import com.yodralopez.vwcleaningrobots.exceptions.InputProcessorException;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +20,7 @@ class InstructionsFileReaderTest {
 
     @Test
     void shouldGetTheInstructionsFromAFileForOneRobots() throws IOException {
-        File file = createFileWithOneRobot();
+        File file = FileTestHelper.createFileWithOneRobot();
         InstructionsFileReader fileReader = new InstructionsFileReader(file.getAbsolutePath());
 
         InstructionsData instructionsData = fileReader.process();
@@ -38,7 +38,7 @@ class InstructionsFileReaderTest {
 
     @Test
     void shouldGetTheInstructionsFromAFileForSomeRobots() throws IOException {
-        File file = createFileWithSomeRobot();
+        File file = FileTestHelper.createFileWithSomeRobot();
         InstructionsFileReader fileReader = new InstructionsFileReader(file.getAbsolutePath());
 
         InstructionsData instructionsData = fileReader.process();
@@ -56,28 +56,6 @@ class InstructionsFileReaderTest {
         assertEquals(3, robotTwo.y());
         assertEquals("E", robotTwo.direction());
         assertEquals("MMRMMRMRRM", robotTwo.commands());
-    }
-
-    private File createFileWithOneRobot() throws IOException {
-        File tempFile = File.createTempFile("instructions", ".txt");
-        try (FileWriter writer = new FileWriter(tempFile)) {
-            writer.write("5 5\n");
-            writer.write("1 2 N\n");
-            writer.write("LMLMLMLMM\n");
-        }
-        return tempFile;
-    }
-
-    private File createFileWithSomeRobot() throws IOException {
-        File tempFile = File.createTempFile("instructions", ".txt");
-        try (FileWriter writer = new FileWriter(tempFile)) {
-            writer.write("5 5\n");
-            writer.write("1 2 N\n");
-            writer.write("LMLMLMLMM\n");
-            writer.write("3 3 E\n");
-            writer.write("MMRMMRMRRM\n");
-        }
-        return tempFile;
     }
 
 }
