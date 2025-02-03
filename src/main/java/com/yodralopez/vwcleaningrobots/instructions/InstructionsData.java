@@ -1,14 +1,14 @@
-package com.yodralopez.vwcleaningrobots.input;
+package com.yodralopez.vwcleaningrobots.instructions;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimulationData {
+public class InstructionsData {
     private int width;
     private int height;
     private final List<RobotData> robots;
 
-    public SimulationData() {
+    public InstructionsData() {
         this.robots = new ArrayList<>();
     }
 

@@ -46,13 +46,13 @@
 ### Input
 
 - The input is read from a file that contains the workspace dimensions, the initial position of the robot and the movements to be made.
-- The application uses an InputProcessor an interface that decouples the way the input is processed, so it can be changed in the future to get the input from a different source (sockets, API, DB, etc.).
-- The InputProcessor returns a SimulationData object that contains the workspace and the list of robots data.
+- The application uses an InstructionsProcessor an interface that decouples the way the input is processed, so it can be changed in the future to get the input from a different source (sockets, API, DB, etc.).
+- The InstructionsProcessor returns a InstructionsData object that contains the workspace and the list of robots data.
 In this way the application decouples the input logic from the domain logic.
 
-#### RobotFileReader
+#### InstructionsFileReader
 
-The application has a RobotFileReader to encapsulate the logic of reading the file.
+The application has a InstructionsFileReader to encapsulate the logic of reading the file.
 
 ### RobotController
 

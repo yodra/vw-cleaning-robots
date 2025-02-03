@@ -1,30 +1,29 @@
-package com.yodralopez.vwcleaningrobots.input;
+package com.yodralopez.vwcleaningrobots.instructions;
 
 import com.yodralopez.vwcleaningrobots.exceptions.InputProcessorException;
-import com.yodralopez.vwcleaningrobots.exceptions.RobotFileReaderException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class RobotFileReader implements InputProcessor {
+public class InstructionsFileReader implements InstructionsProcessor {
     private static final String SEPARATOR = " ";
     private final String filePath;
 
     private BufferedReader reader;
-    private final SimulationData simulationData;
+    private final InstructionsData instructionsData;
 
-    public RobotFileReader(String filePath) {
+    public InstructionsFileReader(String filePath) {
         this.filePath = filePath;
-        this.simulationData = new SimulationData();
+        this.instructionsData = new InstructionsData();
     }
 
-    public SimulationData process() {
+    public InstructionsData process() {
         try {
             openFile(filePath);
             processWorkspaceSize();
             processRobots();
-            return simulationData;
+            return instructionsData;
         } catch (IOException e) {
             throw new InputProcessorException(e.getMessage());
         }
@@ -38,8 +37,8 @@ public class RobotFileReader implements InputProcessor {
         String[] gridSize = reader.readLine().split(SEPARATOR);
         int width = Integer.parseInt(gridSize[0]);
         int height = Integer.parseInt(gridSize[1]);
-        simulationData.setWidth(width);
-        simulationData.setHeight(height);
+        instructionsData.setWidth(width);
+        instructionsData.setHeight(height);
     }
 
     private void processRobots() throws IOException {
@@ -51,7 +50,7 @@ public class RobotFileReader implements InputProcessor {
             String direction = position[2];
 
             String commands = reader.readLine();
-            simulationData.addRobot(new RobotData(x, y, direction, commands));
+            instructionsData.addRobot(new RobotData(x, y, direction, commands));
         }
     }
 }
